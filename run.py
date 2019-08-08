@@ -8,6 +8,7 @@ api = Api(app)
 app.config["DEBUG"] = True
 
 api.add_resource(Prediction, "/predictions")
+api.add_resource(Diagnosis, "/")
 
 if __name__ == "__main__":
   app.run()

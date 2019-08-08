@@ -27,6 +27,11 @@ parser = reqparse.RequestParser()
 parser.add_argument('image_url', type=str)
 
 
+class Diagnosis(Resource):
+    def get(self):
+        return jsonify(diagnoses)
+
+
 class Prediction(Resource):
     def post(self):
 
