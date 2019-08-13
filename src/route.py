@@ -17,11 +17,6 @@ parser.add_argument('image_url_1', type=str)
 parser.add_argument('image_url_2', type=str)
 
 
-class Diagnosis(Resource):
-    def get(self):
-        return jsonify(diagnoses)
-
-
 class Prediction(Resource):
     def post(self):
 
@@ -30,7 +25,10 @@ class Prediction(Resource):
         image_url_1 = str(args['image_url_1'])
         image_url_2 = str(args['image_url_2'])
 
-        data = providePrediction(image_url_1)
+        print(image_url_1)
+        print(image_url_2)
+
+        data = providePrediction(image_url_1, image_url_2)
 
         response = jsonify(data)
 
@@ -39,12 +37,14 @@ class Prediction(Resource):
         return response
 
 
-def providePrediction(image_url_1):
-    control, case = main(image_url_1)
+def providePrediction(image_url_1, image_url_2):
+    pred = main(image_url_1, image_url_2)
+
+    print(pred)
 
     prediction = {
-                    "with diabetic retinopathy": case,
-                    "without diabetic retinopathy": control
+                    "with diabetic retinopathy": pred[1],
+                    "without diabetic retinopathy": pred[0]
                 }
 
     return prediction
